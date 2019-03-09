@@ -13,28 +13,35 @@ func isValid(s string) bool {
 	// byte code for open bracket, '[', 91.
 	// byte code for close bracket, ']', 93.
 	
-	// short circuit to true if empty string
-	if len(s) == 0 { return true}
-	
-	output := false
 	openChars := make([]rune, 0)
+	closeChars := make([]rune, 0)
 	
 	for _, character := range(s) {
 	  if character == '(' || character == '[' || character == '{' {
 		openChars = append(openChars, character)
+	  } else if character == ')' || character == ']' || character == '}' {
+		closeChars = append(closeChars, character)
 	  }
 	  
-  
+	  // Short circuit the tests below if there are not elements in the slice
+	  if len(openChars) == 0 {continue}
+	  
 	  if character == ')' && openChars[len(openChars) - 1] == '(' {
-		output = true
-		openChars = openChars[:len(openChars) - 1]
+		openChars, closeChars = removeElement(openChars, closeChars)
 	  } else if character == ']' && openChars[len(openChars) - 1] == '[' {
-		output = true
-		openChars = openChars[:len(openChars) - 1]
+		openChars, closeChars = removeElement(openChars, closeChars)
 	  } else if character == '}' && openChars[len(openChars) - 1] == '{' {
-		output = true
-		openChars = openChars[:len(openChars) - 1]
-	  } else { output = false }
+		openChars, closeChars = removeElement(openChars, closeChars)
+	  }
 	}
-	return output
+	
+	if len(openChars) == 0 && len(closeChars) == 0 {return true}
+  
+	return false
+  }
+  
+  func removeElement(openStack, closeStack []rune) ([]rune, []rune) {
+	openStack = openStack[:len(openStack) - 1]
+	closeStack = closeStack[:len(closeStack) - 1]
+	return openStack, closeStack
   }
