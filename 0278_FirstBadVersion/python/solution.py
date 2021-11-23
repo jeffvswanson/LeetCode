@@ -33,6 +33,7 @@ Constraints
 
 
 def initial_pass(num_versions: int, bad_version: int) -> int:
+    """Does two comparison to bad_version, that is, isBadVersion"""
     lo_version = 1
     hi_version = num_versions
     first_bad_version = 0
@@ -51,6 +52,7 @@ def initial_pass(num_versions: int, bad_version: int) -> int:
 
 
 def optimized_pass(num_versions: int, bad_version: int) -> int:
+    """Does one comparison to bad_version, that is, isBadVersion"""
     lo_version, hi_version = 1, num_versions
 
     while lo_version < hi_version:
