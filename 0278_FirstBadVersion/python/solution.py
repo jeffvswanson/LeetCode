@@ -48,3 +48,16 @@ def initial_pass(num_versions: int, bad_version: int) -> int:
             hi_version = midpoint - 1
 
     return first_bad_version
+
+
+def optimized_pass(num_versions: int, bad_version: int) -> int:
+    lo_version, hi_version = 1, num_versions
+
+    while lo_version < hi_version:
+        midpoint = (lo_version + hi_version) // 2
+        if midpoint >= bad_version:
+            hi_version = midpoint
+        else:
+            lo_version = midpoint + 1
+
+    return lo_version
