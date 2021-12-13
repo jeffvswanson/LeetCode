@@ -27,13 +27,14 @@ Constraints
 """
 
 def initial_pass(nums: list[int]) -> int:
-    sum = 0
-    if len(nums) < 1:
-        return sum
+    # Check each subarray from size 1 to size n
+    max_sum = -105 * 106  # Ensures we start at a value that can be overwritten 
+    for i in range(1, len(nums)+1):
+        start_index = 0
+        end_index = i
+        while end_index <= len(nums):
+            max_sum = max(max_sum, sum(nums[start_index:end_index]))
+            start_index += 1
+            end_index += 1
 
-    for num in nums:
-        sum += num
-    
-    sum = max(sum, initial_pass(nums[1:]))
-
-    return sum
+    return max_sum
