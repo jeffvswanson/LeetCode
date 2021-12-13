@@ -59,7 +59,7 @@ def initial_pass(s: str) -> int:
 
 
 def optimized_pass(s: str) -> int:
-    power = [1 for c in s]
+    power = [1 for _ in s]
     char = s[0]
     for i in range(1, len(s)):
         if char != s[i]:
