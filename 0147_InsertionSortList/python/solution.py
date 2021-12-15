@@ -36,14 +36,6 @@ class ListNode:
 
 class Solution:
     def insertionSortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        # Store a value of the where we have sorted to in the linked list
-        # Store the value of the node at that point.
-        # Compare the value of the node to the next node and ree if it needs to be moved.
-        # If it needs to be moved, traverse the linked list until we find its insertion point
-        # Break the pointer of the node that was pointing to the node we are moving and set it to the moving nodes next node if it exists
-        # Ensure the node where it is moving to has the previous node pointing at the moved node if the previous node exists, otherwise it's the root
-        # If we get to a node that has no next node, we've sorted the entire list
-
         node = head
         while node and node.next:
             next_node = node.next
@@ -64,5 +56,4 @@ class Solution:
                     insert_after_node.next = next_node
             else:
                 node = node.next
-
         return head
