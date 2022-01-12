@@ -23,4 +23,20 @@ Constraints
 
 class Solution:
     def addBinary(self, a: str, b: str) -> str:
-        pass
+        max_len = max(len(a), len(b))
+        if len(a) < max_len:
+            a, b = b, a
+
+        len_diff = max_len - len(b)
+        b = ("0" * len_diff) + b
+        
+        result = ""
+        carry = 0
+        for i in range(len(a)-1, -1, -1):
+            sum = int(a[i]) + int(b[i]) + carry
+            carry, val = divmod(sum, 2)
+            result += str(val)
+        if carry:
+            result += str(carry)
+        
+        return result[::-1]
